@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\CompaniesDataTable;
+use App\DataTables\testDataTable;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -14,7 +15,7 @@ class CompanyController extends Controller
      */
     public function index(CompaniesDataTable $datatable)
     {
-        //
+        return $datatable->render('pages.company.index');
     }
 
     /**
