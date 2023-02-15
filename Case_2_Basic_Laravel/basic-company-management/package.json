@@ -1,20 +1,49 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build"
-    },
-    "devDependencies": {
-        "@popperjs/core": "^2.11.6",
-        "@vitejs/plugin-react": "^2.2.0",
-        "axios": "^1.1.2",
-        "bootstrap": "^5.2.3",
-        "laravel-vite-plugin": "^0.7.2",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "sass": "^1.56.1",
-        "vite": "^4.0.0"
-    }
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
+  },
+  "devDependencies": {
+    "@popperjs/core": "^2.11.6",
+    "axios": "^1.1.2",
+    "bootstrap": "^5.2.3",
+    "laravel-mix": "^6.0.49",
+    "lodash": "^4.17.19",
+    "postcss": "^8.1.14",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.56.1"
+  },
+  "dependencies": {
+    "datatables.net-autofill-bs4": "^2.3.9",
+    "datatables.net-bs4": "^3.2.2",
+    "datatables.net-buttons-bs4": "^1.7.1",
+    "datatables.net-colreorder-bs4": "^1.5.4",
+    "datatables.net-editor": "^2.1.0",
+    "datatables.net-editor-bs4": "^2.0.3",
+    "datatables.net-fixedcolumns-bs4": "^3.3.3",
+    "datatables.net-fixedheader-bs4": "^3.1.9",
+    "datatables.net-keytable-bs4": "^2.6.2",
+    "datatables.net-responsive-bs4": "^2.2.9",
+    "datatables.net-rowreorder-bs4": "^1.2.8",
+    "datatables.net-scroller-bs4": "^2.0.4",
+    "datatables.net-select-bs4": "^1.6.0",
+    "pdfmake": "^0.1.71",
+    "sweetalert": "^2.1.2"
+  },
+  "name": "basic-company-management",
+  "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\" alt=\"Laravel Logo\"></a></p>",
+  "version": "1.0.0",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

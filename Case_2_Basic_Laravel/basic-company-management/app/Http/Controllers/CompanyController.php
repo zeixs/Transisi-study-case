@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\CompaniesDataTable;
+use App\DataTables\testDataTable;
+use App\Helpers\ResponseHelper;
+use App\Models\Company;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class CompanyController extends Controller
 {
@@ -14,7 +19,7 @@ class CompanyController extends Controller
      */
     public function index(CompaniesDataTable $datatable)
     {
-        //
+        return $datatable->render('pages.company.index');
     }
 
     /**
@@ -80,6 +85,18 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $msg = 'Data berhasil dihapus';
+
+        try {
+            $company = Company::findOrFail($id);
+            $company->delete();
+        } catch (QueryException $th) {
+            $msg = Arr::last($th->errorInfo);
+            toast($msg, 'error');
+            return ResponseHelper::json(500, $msg);
+        }
+
+        toast($msg, 'success');
+        return ResponseHelper::json(200, $msg);
     }
 }
