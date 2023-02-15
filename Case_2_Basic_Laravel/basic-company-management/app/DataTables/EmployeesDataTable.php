@@ -63,7 +63,7 @@ class EmployeesDataTable extends DataTable
             ->buttons(
                 Button::make('create')->text('Import')->attr(['name' => 'ImportBtn'])->action('uploadFile()'),
                 Button::make('create'),
-                Button::make('export'),
+                Button::make('pdf')->action("window.location = '".route('export.employees')."';"),
                 Button::make('print'),
                 Button::make('reset'),
                 Button::make('reload')

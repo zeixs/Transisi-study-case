@@ -26,8 +26,8 @@ mix.combine([
     'node_modules/datatables.net-select/js/dataTables.select.min.js',
     'node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js',
     'public/vendor/datatables/buttons.server-side.js',
-    // 'node_modules/pdfmake/build/pdfmake.min.js',
-    // 'node_modules/pdfmake/build/vfs_fonts.js',
+    'node_modules/pdfmake/build/pdfmake.min.js',
+    'node_modules/pdfmake/build/vfs_fonts.js',
     // 'node_modules/jszip/dist/jszip.min.js',
 ], 'public/assets/js/custom/datatable-assets.js');
 /* end custom resources */
