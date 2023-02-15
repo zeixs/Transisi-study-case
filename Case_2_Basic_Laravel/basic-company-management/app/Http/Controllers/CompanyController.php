@@ -5,84 +5,69 @@ namespace App\Http\Controllers;
 use App\DataTables\CompaniesDataTable;
 use App\DataTables\testDataTable;
 use App\Helpers\ResponseHelper;
+use App\Http\Requests\CompanyForm;
 use App\Models\Company;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class CompanyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(CompaniesDataTable $datatable)
     {
         return $datatable->render('pages.company.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('pages.company.add-edit');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(CompanyForm $request)
     {
-        //
+        return DB::transaction(function () use ($request) {
+            $msg = "Data Tersimpan";
+            try {
+                $data = Company::createFromRequest($request);
+
+            } catch (QueryException $th) {
+                DB::rollBack();
+                $msg = Arr::last($th->errorInfo);
+                toast($msg, 'error');
+                return ResponseHelper::json(500, $msg);
+            }
+
+            toast($msg, 'success');
+            return ResponseHelper::json(200, $msg);
+        });
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $data = Company::findOrFail($id);
+        return view('pages.company.add-edit', ['data' => $data]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Company $company)
     {
-        //
+        return DB::transaction(function () use ($request, $company) {
+            $msg = 'Data berhasil diubah';
+
+            try {
+                $company->mapFromRequest($request);
+                $company->save();
+            } catch (QueryException $th) {
+                $msg = Arr::last($th->errorInfo);
+                toast($msg, 'error');
+                return ResponseHelper::json(500, $msg);
+            }
+
+            toast($msg, 'success');
+            return ResponseHelper::json(200, $msg);
+        });
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $msg = 'Data berhasil dihapus';

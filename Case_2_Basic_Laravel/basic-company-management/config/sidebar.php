@@ -22,14 +22,14 @@ return [
         [
             'icon' => 'fa fa-home',
             'title' => 'Companies',
-            'url' => '/companies',
+            'url' => '/company',
             'caret' => false,
             'role' => 'super_admin'
         ],
         [
             'icon' => 'fa fa-users',
             'title' => 'Employees',
-            'url' => '/employees',
+            'url' => '/employee',
             'caret' => false,
         ],
     ],

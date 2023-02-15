@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', isset($data) ? 'Edit Invoice' : 'Create Invoice' )
+@section('title', isset($data) ? 'Edit Company' : 'Create Company' )
 
 @section('content')
 <!-- begin breadcrumb -->
@@ -16,7 +16,7 @@
 
 
 <!-- begin panel -->
-<form action="{{ isset($data) ? route('admin.invoice.update', $data->id) : route('admin.invoice.store') }}" id="form" name="form" method="POST" data-parsley-validate="true">
+<form action="{{ isset($data) ? route('company.update', $data->id) : route('company.store') }}" id="form" name="form" method="POST" data-parsley-validate="true">
   @csrf
   @if(isset($data))
   {{ method_field('PUT') }}
@@ -34,34 +34,22 @@
     <!-- end panel-heading -->
     <!-- begin panel-body -->
     <div class="panel-body">
-      @if(isset($ponpes) != null)
-        <div class="form-group">
-          <label>Ponpes</label>
-          <x-form.dropdown name="invoice_ponpes_id" :options="$ponpes" :selected="old('invoice_ponpes_id') ?? (isset($data->ponpes->id) ? $data->ponpes->id : null)"/>
-          </div>
-      @else
-          <input type="hidden" name="invoice_ponpes_id" value="{{auth()->user()->load(['ponpes'])->ponpes->first()->id}}">
-      @endif
       <div class="form-group">
-        <label for="name">Kode</label>
-        <input type="text" name="invoice_code" class="form-control" autofocus data-parsley-required="true" value="{{{ old('invoice_code') ?? $data->code ?? null }}}">
+        <label for="name">Company name</label>
+        <input type="text" name="company_name" class="form-control" autofocus data-parsley-required="true" value="{{{ old('company_name') ?? $data->name ?? null }}}">
       </div>
       <div class="form-group">
-        <label>Santri</label>
-        <x-form.dropdown name="invoice_santri_id" :options="$santris" :selected="old('invoice_santri_id') ?? (isset($data->santri_id) ? $data->santri_id : null)"/>
+        <label for="name">Email</label>
+        <input type="text" name="company_email" class="form-control" autofocus data-parsley-required="true" value="{{{ old('company_email') ?? $data->email ?? null }}}">
       </div>
       <div class="form-group">
-        <label>Produk</label>
-        <x-form.dropdown name="invoice_products[]" :options="$products" :selected="old('invoice_products[]') ?? (isset($data->products) ? $data->products->pluck('id')->toArray() : null)" multiple/>
+        <label for="name">Logo</label>
+        <input type="text" name="company_logo" class="form-control" autofocus data-parsley-required="true" value="{{{ old('company_logo') ?? $data->logo ?? null }}}">
       </div>
       <div class="form-group">
-        <label>
-          Berulang Tiap Bulan
-        </label>
-        <input type="number" name="invoice_recurring" class="form-control" min="1" max="28" placeholder="berulang tiap tanggal 1 = isikan 1"autofocus data-parsley-required="false" value="{{{ old('invoice_recurring') ?? $data->recurring->day ?? null }}}">
-        <small>
-          *kosongkan bila hanya untuk sekali 
-        </small>
+        <label for="name">Website</label>
+        <input type="text" name="company_website" class="form-control" autofocus data-parsley-required="true" value="{{{ old('company_website') ?? $data->website ?? null }}}">
+      </div>
       </div>
     </div>
     <!-- end panel-body -->

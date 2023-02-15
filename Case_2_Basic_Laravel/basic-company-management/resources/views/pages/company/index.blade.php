@@ -18,7 +18,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Invoice<small> @yield('title')</small></h1>
+<h1 class="page-header"> @yield('title')</h1>
 <!-- end page-header -->
 
 {{-- <div class="alert alert-dark fade show">
