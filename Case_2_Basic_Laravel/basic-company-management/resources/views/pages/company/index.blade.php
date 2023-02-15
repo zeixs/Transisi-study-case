@@ -21,6 +21,9 @@
 <h1 class="page-header"> @yield('title')</h1>
 <!-- end page-header -->
 
+<input type="file" name="excel" id="fileUpload" style="display:none" onchange="submitFile();"/>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
 {{-- <div class="alert alert-dark fade show">
   <strong>Cara pakai!</strong>
   gunakan fungsi "config('settings.name');"
@@ -58,5 +61,22 @@
   $(document).on('delete-with-confirmation.success', function() {
     $('.buttons-reload').trigger('click')
   })
+</script>
+<script>
+  function uploadFile() {
+    $('#fileUpload').trigger('click');
+  }
+  async function submitFile(url) {
+    let formData = new FormData();           
+    formData.append("file", fileUpload.files[0]);
+    await fetch('/company/import', {
+    method: "POST",
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }, 
+    body: formData
+    });    
+    alert('The file has been uploaded successfully.');
+  }
 </script>
 @endpush

@@ -21,6 +21,9 @@
 <h1 class="page-header"> @yield('title')</h1>
 <!-- end page-header -->
 
+<input type="file" name="excel" id="fileUpload" style="display:none" onchange="submitFile();"/>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
 {{-- <div class="alert alert-dark fade show">
   <strong>Cara pakai!</strong>
   gunakan fungsi "config('settings.name');"
@@ -31,7 +34,7 @@
 <div class="panel panel-inverse">
   <!-- begin panel-heading -->
   <div class="panel-heading">
-    <h4 class="panel-title">DataTable - @yield('title')</h4>
+    <h4 class="panel-title">@yield('title')</h4>
     <div class="panel-heading-btn">
       <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
       <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
@@ -58,5 +61,22 @@
   $(document).on('delete-with-confirmation.success', function() {
     $('.buttons-reload').trigger('click')
   })
+</script>
+<script>
+  function uploadFile() {
+    $('#fileUpload').trigger('click');
+  }
+  async function submitFile(url) {
+    let formData = new FormData();           
+    formData.append("file", fileUpload.files[0]);
+    await fetch('/employee/import', {
+    method: "POST",
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }, 
+    body: formData
+    });    
+    alert('The file has been uploaded successfully.');
+  }
 </script>
 @endpush

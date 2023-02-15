@@ -23,4 +23,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/company', 'CompanyController');
 Route::resource('/employee', 'EmployeeController');
-Route::get('/dataforselect2', 'CompanyController@getdataforselect2')->name('dataforselect2');
+Route::post('/company/import', 'ImportController@company')->name('company.import');
+Route::post('/employee/import', 'ImportController@employee')->name('employee.import');

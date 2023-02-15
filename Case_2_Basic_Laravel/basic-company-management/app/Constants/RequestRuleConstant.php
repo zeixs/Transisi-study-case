@@ -20,4 +20,10 @@ class RequestRuleConstant
             'employee_company_id' => 'required',
         ]);
     }
+
+    public static function importColumns(){
+        return collect([
+            'file' => 'required|mimes:csv,xlx,xls,xlsx|max:2048'
+        ]);
+    }
 }
