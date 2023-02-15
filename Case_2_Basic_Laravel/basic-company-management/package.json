@@ -35,7 +35,8 @@
     "datatables.net-scroller-bs4": "^2.0.4",
     "datatables.net-select-bs4": "^1.6.0",
     "pdfmake": "^0.1.71",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "parsleyjs": "^2.9.2"
   },
   "name": "basic-company-management",
   "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\" alt=\"Laravel Logo\"></a></p>",

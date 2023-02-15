@@ -70,3 +70,5 @@ mix.copy('node_modules/datatables.net-select-bs4/js/', 'public/assets/plugins/da
 
 // sweetalert
 mix.copy('node_modules/sweetalert/dist/', 'public/assets/plugins/sweetalert/dist/');
+//parsley
+mix.copy('node_modules/parsleyjs/', 'public/assets/plugins/parsleyjs/');
