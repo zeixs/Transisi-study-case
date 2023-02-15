@@ -14,15 +14,17 @@
     </head>
     <body>
         <table class="table table-bordered table-condensed table-striped">
-            @foreach($data as $row)
+            @foreach($data as $index => $row)
                 @if ($loop->first)
                     <tr>
+                        <th>No</th>
                         @foreach($row as $key => $value)
                             <th>{!! $key !!}</th>
                         @endforeach
                     </tr>
                 @endif
                 <tr>
+                    <td>{!! $index + 1!!}</td>
                     @foreach($row as $key => $value)
                         @if(is_string($value) || is_numeric($value))
                             <td>{!! $value !!}</td>

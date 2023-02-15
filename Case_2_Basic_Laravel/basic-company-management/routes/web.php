@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Auth::routes();
@@ -22,5 +22,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/company', 'CompanyController');
+Route::group(['prefix' => 'export', 'as' => 'export.'], function(){
+    Route::get('/companies', 'ExportController@companies')->name('companies');
+});
 Route::resource('/employee', 'EmployeeController');
 Route::get('/dataforselect2', 'CompanyController@getdataforselect2')->name('dataforselect2');
