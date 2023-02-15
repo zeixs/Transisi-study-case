@@ -24,6 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('/company', 'CompanyController');
 Route::group(['prefix' => 'export', 'as' => 'export.'], function(){
     Route::get('/companies', 'ExportController@companies')->name('companies');
+    Route::get('/employees', 'ExportController@employees')->name('employees');
 });
 Route::resource('/employee', 'EmployeeController');
 Route::get('/dataforselect2', 'CompanyController@getdataforselect2')->name('dataforselect2');

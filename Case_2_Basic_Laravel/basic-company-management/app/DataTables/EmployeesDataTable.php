@@ -62,7 +62,7 @@ class EmployeesDataTable extends DataTable
             ->orderBy(1)
             ->buttons(
                 Button::make('create'),
-                Button::make('export'),
+                Button::make('pdf')->action("window.location = '".route('export.employees')."';"),
                 Button::make('print'),
                 Button::make('reset'),
                 Button::make('reload')

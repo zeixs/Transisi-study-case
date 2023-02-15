@@ -19,15 +19,19 @@
                     <tr>
                         <th>No</th>
                         @foreach($row as $key => $value)
-                            <th>{!! $key !!}</th>
+                            @if($key == 'company_name')
+                                <th>Nama Perusahaan</th>
+                            @else
+                                <th>{!! $key !!}</th>
+                            @endif
                         @endforeach
                     </tr>
                 @endif
                 <tr>
                     <td>{!! $index + 1!!}</td>
                     @foreach($row as $key => $value)
-                        @if(is_string($value) || is_numeric($value))
-                            <td>{!! $value !!}</td>
+                    @if(is_string($value) || is_numeric($value))
+                        <td>{!! $value !!}</td>
                         @else
                             <td></td>
                         @endif
