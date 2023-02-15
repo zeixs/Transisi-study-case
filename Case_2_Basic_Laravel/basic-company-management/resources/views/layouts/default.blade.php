@@ -32,11 +32,6 @@ $contentClass .= (!empty($contentInverseMode)) ? 'content-inverse-mode ' : '';
 
 	<div id="page-container" class="page-container fade page-sidebar-fixed page-header-fixed {{ $pageContainerClass }}">
 
-		<form action="{{route('company.import')}}" method="POST" enctype=”multipart/form-data”>
-			@csrf
-			<input type="file" name="excel" id="fileUpload" style="display:none" onchange="submitFile();"/>
-		</form>
-		<meta name="csrf-token" content="{{ csrf_token() }}" />
 		@include('includes.header')
 
 		@includeWhen($topMenu, 'includes.top-menu')
@@ -57,24 +52,6 @@ $contentClass .= (!empty($contentInverseMode)) ? 'content-inverse-mode ' : '';
 
 	@include('includes.page-js')
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>//todo-fix-js-resource
-	<script>
-
-		function uploadFile() {
-			$('#fileUpload').trigger('click');
-		}
-		async function submitFile() {
-			let formData = new FormData();           
-			formData.append("file", fileUpload.files[0]);
-			await fetch('/company/import', {
-			method: "POST",
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}, 
-			body: formData
-			});    
-			alert('The file has been uploaded successfully.');
-		}
-	</script>
 
 </body>
 
