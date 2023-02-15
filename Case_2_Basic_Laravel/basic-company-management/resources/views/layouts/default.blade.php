@@ -51,7 +51,7 @@ $contentClass .= (!empty($contentInverseMode)) ? 'content-inverse-mode ' : '';
 	</div>
 
 	@include('includes.page-js')
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>//todo-fix-js-resource
 
 </body>
 
