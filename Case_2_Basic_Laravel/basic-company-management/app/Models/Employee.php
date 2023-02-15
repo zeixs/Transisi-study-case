@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\FillableInputTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    use HasFactory;
+    use HasFactory, FillableInputTrait;
+
+    protected $fillableMapPrefix = 'employee';
 
     protected $fillable = [
         'name',

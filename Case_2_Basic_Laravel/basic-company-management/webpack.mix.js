@@ -70,5 +70,10 @@ mix.copy('node_modules/datatables.net-select-bs4/js/', 'public/assets/plugins/da
 
 // sweetalert
 mix.copy('node_modules/sweetalert/dist/', 'public/assets/plugins/sweetalert/dist/');
+
 //parsley
 mix.copy('node_modules/parsleyjs/', 'public/assets/plugins/parsleyjs/');
+
+// select2
+mix.copy('node_modules/select2/dist/', 'public/assets/plugins/select2/dist/');
+mix.js('resources/js/select2.autofocus.fix.js', 'public/assets/js/custom/');

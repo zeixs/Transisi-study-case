@@ -2,83 +2,89 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\EmployeesDataTable;
+use App\Helpers\ResponseHelper;
+use App\Http\Requests\EmployeeForm;
+use App\Models\Company;
+use App\Models\Employee;
+use Doctrine\DBAL\Query\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(EmployeesDataTable $datatable)
     {
-        //
+        return $datatable->render('pages.employee.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $companies = Company::pluck('name', 'id');
+        return view('pages.employee.add-edit', ['companies' => $companies]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(EmployeeForm $request)
     {
-        //
+        return DB::transaction(function () use ($request) {
+            $msg = "Data Tersimpan";
+            try {
+                $data = Employee::createFromRequest($request);
+
+            } catch (QueryException $th) {
+                DB::rollBack();
+                $msg = Arr::last($th->errorInfo);
+                toast($msg, 'error');
+                return ResponseHelper::json(500, $msg);
+            }
+
+            toast($msg, 'success');
+            return ResponseHelper::json(200, $msg);
+        });
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $data = Employee::findOrFail($id);
+        $companies = Company::pluck('name', 'id');
+        return view('pages.employee.add-edit', ['data' => $data,'companies' => $companies]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        return DB::transaction(function () use ($request, $id) {
+            $msg = 'Data berhasil diubah';
+
+            try {
+                $employee = Employee::findOrFail($id);
+                $employee->mapFromRequest($request);
+                $employee->save();
+            } catch (QueryException $th) {
+                $msg = Arr::last($th->errorInfo);
+                toast($msg, 'error');
+                return ResponseHelper::json(500, $msg);
+            }
+
+            toast($msg, 'success');
+            return ResponseHelper::json(200, $msg);
+        });
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $msg = 'Data berhasil dihapus';
+
+        try {
+            $company = Employee::findOrFail($id);
+            $company->delete();
+        } catch (QueryException $th) {
+            $msg = Arr::last($th->errorInfo);
+            toast($msg, 'error');
+            return ResponseHelper::json(500, $msg);
+        }
+
+        toast($msg, 'success');
+        return ResponseHelper::json(200, $msg);
     }
 }
