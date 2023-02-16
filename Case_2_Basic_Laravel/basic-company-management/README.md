@@ -1,3 +1,6 @@
+# Recruitment Test PT.Transisi Teknologi Mandiri
+Project ini dimaksudkan untuk menguji keterampilan peserta rekrutmen. Dalam proyek ini penulis bekerja secara maksimal berdasarkan keterampilan penulis.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -6,6 +9,67 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+
+## _Case 1 Basic PHP_
+- Tiap Soal yang diberikan penulis kerjakan dalam satu file
+- Fungsi dapat langsung di eksekusi dengan framework laravel
+
+## _Case 2 Basic Laravel_
+## Requirement
+- Php ver. 8.2
+- Node ver. 18.12
+- Composer
+
+## Installation
+Copy  
+```sh
+.env.example
+```
+paste and rename it to 
+```sh
+.env
+```
+After that, customize _.env_ file to your needs
+
+Install Dependency
+```sh
+composer install
+```
+Generate App Key
+```sh
+php artisan key:generate
+```
+Migrate & seed the Database
+```sh
+php artisan migrate
+php artisan db:seed
+```
+Compile Script & Theme
+_For Devleopment Purpose_
+_using npm_
+```sh
+npm
+npm run development
+```
+_using yarn_
+```sh
+yarn
+yarn development
+```
+
+_For Production Deployment_
+_using npm_
+```sh
+npm
+npm run production
+```
+_using yarn_
+```sh
+yarn
+yarn production
+```
+
+# Done! Now you can access the App!
 
 ## About Laravel
 
