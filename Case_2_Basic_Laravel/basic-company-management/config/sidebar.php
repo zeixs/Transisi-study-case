@@ -16,7 +16,7 @@ return [
         [
             'icon' => 'fa fa-th-large',
             'title' => 'Dashboard',
-            'url' => '/home',
+            'url' => '/dashboard',
             'caret' => false
         ],
         [

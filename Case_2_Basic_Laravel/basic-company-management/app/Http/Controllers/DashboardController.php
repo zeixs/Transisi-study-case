@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\DashboardDataTable;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,8 +22,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(DashboardDataTable $datatable)
     {
-        return view('home');
+        return $datatable->render('dashboard');
     }
 }

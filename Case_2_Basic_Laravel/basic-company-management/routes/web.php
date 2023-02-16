@@ -21,14 +21,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::resource('/company', 'CompanyController');
 
-Route::resource('/company', 'CompanyController');
-Route::group(['prefix' => 'export', 'as' => 'export.'], function(){
-    Route::get('/companies', 'ExportController@companies')->name('companies');
-    Route::get('/employees', 'ExportController@employees')->name('employees');
+    Route::resource('/company', 'CompanyController');
+    Route::group(['prefix' => 'export', 'as' => 'export.'], function(){
+        Route::get('/companies', 'ExportController@companies')->name('companies');
+        Route::get('/employees', 'ExportController@employees')->name('employees');
+    });
+    Route::resource('/employee', 'EmployeeController');
+    Route::post('/company/import', 'ImportController@company')->name('company.import');
+    Route::post('/employee/import', 'ImportController@employee')->name('employee.import');
+    Route::get('/get-companies', 'CompanyController@getCompanies');
 });
-Route::resource('/employee', 'EmployeeController');
-Route::post('/company/import', 'ImportController@company')->name('company.import');
-Route::post('/employee/import', 'ImportController@employee')->name('employee.import');
-Route::get('/get-companies', 'CompanyController@getCompanies');
