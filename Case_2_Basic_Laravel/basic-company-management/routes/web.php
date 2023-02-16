@@ -36,3 +36,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/employee/import', 'ImportController@employee')->name('employee.import');
     Route::get('/get-companies', 'CompanyController@getCompanies');
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
