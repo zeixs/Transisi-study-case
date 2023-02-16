@@ -22,9 +22,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('/company', 'CompanyController');
 
+    Route::resource('/company', 'CompanyController');
     Route::group(['prefix' => 'export', 'as' => 'export.'], function(){
         Route::get('/companies', 'ExportController@companies')->name('companies');
         Route::get('/employees', 'ExportController@employees')->name('employees');
