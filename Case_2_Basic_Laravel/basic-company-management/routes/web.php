@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Company;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +31,4 @@ Route::group(['prefix' => 'export', 'as' => 'export.'], function(){
 Route::resource('/employee', 'EmployeeController');
 Route::post('/company/import', 'ImportController@company')->name('company.import');
 Route::post('/employee/import', 'ImportController@employee')->name('employee.import');
+Route::get('/get-companies', 'CompanyController@getCompanies');

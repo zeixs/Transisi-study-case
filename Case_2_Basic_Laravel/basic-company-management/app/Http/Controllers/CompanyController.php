@@ -84,4 +84,29 @@ class CompanyController extends Controller
         toast($msg, 'success');
         return ResponseHelper::json(200, $msg);
     }
+
+    public function getCompanies(Request $request){
+        
+        if ($request->ajax()) {
+
+            $term = trim($request->term);
+            $posts = DB::table('companies')->select('id','name as text')
+                ->where('name', 'LIKE',  '%' . $term. '%')
+                ->orderBy('name', 'asc')->simplePaginate(10);
+           
+            $morePages=true;
+           $pagination_obj= json_encode($posts);
+           if (empty($posts->nextPageUrl())){
+            $morePages=false;
+           }
+            $results = array(
+              "results" => $posts->items(),
+              "pagination" => array(
+                "more" => $morePages
+              )
+            );
+        
+            return response()->json($results);
+        }
+    }
 }

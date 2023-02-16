@@ -44,7 +44,8 @@
       </div>
       <div class="form-group">
         <label>Company</label>
-        <x-dropdown name="employee_company_id" :options="$companies" :selected="old('employee_company_id') ?? (isset($data->company->id) ? $data->company->id : null)"/>
+        {{-- <select class="select2 form-control"></select> --}}
+        <x-dropdown name="employee_company_id" :placeholder="'Pilih Perusahaan'" :options="$companies" :selected="old('employee_company_id') ?? (isset($data->company->id) ? $data->company->id : null)"/>
       </div>
       </div>
     </div>
@@ -65,6 +66,11 @@
 @endsection
 
 @push('scripts')
+{{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
 <script src="{{ asset('/assets/js/custom/ajax-form-handler.js') }}"></script>
 <script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
+@endpush
+
+@push('css')
+{{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
 @endpush
