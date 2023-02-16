@@ -49,24 +49,24 @@ _For Devleopment Purpose_
 _using npm_
 ```sh
 npm
-npm run development
+npm run dev
 ```
 _using yarn_
 ```sh
 yarn
-yarn development
+yarn dev
 ```
 
 _For Production Deployment_
 _using npm_
 ```sh
 npm
-npm run production
+npm run build
 ```
 _using yarn_
 ```sh
 yarn
-yarn production
+yarn build
 ```
 
 # Done! Now you can access the App!
